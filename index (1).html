@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>FocusBreak</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#0d6efd;
+  color:white;
+  text-align:center;
+  padding-top:60px;
+}
+
+h1{ color: #ffeb3b; }
+
+button{
+  padding:14px 28px;
+  font-size:18px;
+  border-radius:20px;
+  border:none;
+  background:#ff5252;
+  color:white;
+  cursor:pointer;
+  transition:transform .2s, background .3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+  background:#ff1744;
+}
+
+#messaggio{
+  margin-top:30px;
+  font-size:22px;
+  opacity:0;
+  transition:opacity .6s, transform .3s;
+}
+
+#dataora{
+  margin-top:15px;
+  font-size:16px;
+  color:#e0e0e0;
+}
+</style>
+</head>
+
+<body>
+
+<h1>FocusBreak</h1>
+<p>Un momento per te</p>
+
+<button onclick="mostra()">Inizia</button>
+
+<div id="messaggio"></div>
+<div id="dataora"></div>
+
+<script>
+const messaggi = [
+  "Respira. Sei al sicuro.",
+  "Fai una cosa alla volta.",
+  "Non devi dimostrare nulla.",
+  "Anche oggi stai resistendo.",
+  "La calma è una forza."
+];
+
+function mostra(){
+  const msg = document.getElementById("messaggio");
+  const dataora = document.getElementById("dataora");
+
+  const testo = messaggi[Math.floor(Math.random()*messaggi.length)];
+  msg.textContent = testo;
+  msg.style.opacity = 1;
+  msg.style.transform = "scale(1.1)";
+  setTimeout(()=>msg.style.transform="scale(1)",200);
+
+  const d = new Date();
+  dataora.textContent =
+    d.toLocaleDateString("it-IT") + " • " +
+    d.toLocaleTimeString("it-IT");
+}
+</script>
+
+</body>
+</html>
