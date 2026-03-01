@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dev Focus Tool</title>
+<style>
+    body {
+        background-color:blue;
+        color: #00ff88;
+        font-family: monospace;
+        text-align: center;
+        padding-top: 100px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    #timer {
+        font-size: 60px;
+        margin: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 18px;
+        margin: 5px;
+        background: black;
+        color: #00ff88;
+        border: 2px solid #00ff88;
+        border-radius:19px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #00ff88;
+        color: black;
+    }
+
+    #message {
+        margin-top: 30px;
+        font-size: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>⚡ DEV FOCUS MODE ⚡</h1>
+<div id="timer">25:00</div>
+
+<button onclick="startTimer()">START</button>
+<button onclick="resetTimer()">RESET</button>
+
+<div id="message"></div>
+
+<script>
+let time = 1500; // 25 minuti
+let interval;
+let running = false;
+
+let messages = [
+    "Codice come un campione 💻🔥",
+    "Deep Work attivo 😎",
+    "Non mollare ✈️",
+    "Non ti arrendere✈️",
+    "Energia ribelle attiva ⚡",
+    "Costruisci il tuo futuro 🚀"
+];
+
+function updateDisplay() {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    document.getElementById("timer").innerHTML =
+        (minutes < 10 ? "0" : "") + minutes + ":" +
+        (seconds < 10 ? "0" : "") + seconds;
+}
+
+function startTimer() {
+    if (!running) {
+        running = true;
+        interval = setInterval(function() {
+            if (time > 0) {
+                time--;
+                updateDisplay();
+            } else {
+                clearInterval(interval);
+                document.body.style.backgroundColor = "blue";
+                document.getElementById("message").innerHTML =
+                    "SESSION COMPLETE 🚀 THE SKY IS YOURS";
+            }
+        }, 1000);
+
+        let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        document.getElementById("message").innerHTML = randomMessage;
+    }
+}
+
+function resetTimer() {
+    clearInterval(interval);
+    running = false;
+    time = 1500;
+    updateDisplay();
+    document.body.style.backgroundColor = "blue";
+    document.getElementById("message").innerHTML = "";
+}
+
+updateDisplay();
+</script>
+
+</body>
+</html>
